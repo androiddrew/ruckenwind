@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+<head>
+        {% block head %}
+        {% include 'analytics.html' %}
+        <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8" />
+        {% if FEED_ALL_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
+        {% endif %}
+        {% if FEED_ALL_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" />
+        {% endif %}
+        {% if FEED_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{%if FEED_ATOM_URL %}{{ FEED_ATOM_URL }}{% else %}{{ FEED_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+        {% endif %}
+        {% if FEED_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_RSS_URL %}{{ FEED_RSS_URL }}{% else %}{{ FEED_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        {% endif %}
+        {% if CATEGORY_FEED_ATOM and category %}
+        <link href="{{ FEED_DOMAIN }}/{% if CATEGORY_FEED_ATOM_URL %}{{ CATEGORY_FEED_ATOM_URL|format(category.slug) }}{% else %}{{ CATEGORY_FEED_ATOM|format(category.slug) }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Categories Atom Feed" />
+        {% endif %}
+        {% if CATEGORY_FEED_RSS and category %}
+        <link href="{{ FEED_DOMAIN }}/{% if CATEGORY_FEED_RSS_URL %}{{ CATEGORY_FEED_RSS_URL|format(category.slug) }}{% else %}{{ CATEGORY_FEED_RSS|format(category.slug) }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Categories RSS Feed" />
+        {% endif %}
+        {% if TAG_FEED_ATOM and tag %}
+        <link href="{{ FEED_DOMAIN }}/{% if TAG_FEED_ATOM_URL %}{{ TAG_FEED_ATOM_URL|format(tag.slug) }}{% else %}{{ TAG_FEED_ATOM|format(tag.slug) }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Tags Atom Feed" />
+        {% endif %}
+        {% if TAG_FEED_RSS and tag %}
+        <link href="{{ FEED_DOMAIN }}/{% if TAG_FEED_RSS_URL %}{{ TAG_FEED_RSS_URL|format(tag.slug) }}{% else %}{{ TAG_FEED_RSS|format(tag.slug) }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Tags RSS Feed" />
+        {% endif %}
+        <!-- twitter card metadata -->
+        {% block twittercard %}
+        {% endblock twittercard %}
+        <!-- OG Tags -->
+        {% block ogtags %}
+        {% endblock ogtags %}
+        <!-- favicon -->
+        {% if FAVICON %}
+        <link rel="icon" type="image/png" href="{{ SITEURL }}/images/{{ FAVICON }}">
+        {% endif %}
+        <!-- moment.js for date formatting -->
+        <script src="{{ SITEURL }}/theme/js/moment.js"></script>
+        <!-- css -->
+        <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/ruckenwind.css" />
+        <!--  Inter font family https://github.com/rsms/inter -->
+        <link rel="preconnect" href="https://rsms.me/">
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+        {% endblock head %}
+</head>
+<body>
+    {% include 'github.html' %}
+    {% block header %}
+    <div role="banner" id="masthead">
+        <header>
+            {% if GRAVATAR %}
+            <a href="/"><img src="{{ GRAVATAR }}" alt="Drew Bednar Avatar" class="gravatar"></a>
+            {% elif LOGO %}
+            <a href="/"><img src="{{ SITEURL }}/images/{{ LOGO }}" alt="Ruckenwind Logo"></a>
+            {% else %}
+            <h1><a href="/">{{ FIRST_NAME }}'s Blog</a></h1>
+            {% endif %}
+            <a href="#menu" id="menu-link">more stuff</a>
+            <nav id="menu">
+                <ul>
+                    {% if DISPLAY_PAGES_ON_MENU %}
+                      {% for p in pages %}
+                        <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.slug }}</a></li>
+                      {% endfor %}
+                    {% endif %}
+                    {% for title, link in MENUITEMS %}
+                        <li><a href="{{ link }}">{{ title }}</a></li>
+                    {% endfor %}
+                    {% if DISPLAY_CATEGORIES_ON_MENU %}
+                        {% for cat, null in categories %}
+                            {% if cat != "misc" %}
+                            <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+    </div>
+    {% endblock header %}
+        <div class="page" role="main">
+            {% block content %}
+            {% endblock content %}
+            {% block footer %}
+                <footer>
+<!--                  TODO Implement -->
+<!--                    <div class="icons">-->
+<!--                        {% if TWITTER %}-->
+<!--                        <a href="{{ TWITTER }}" target="_blank"><div class="icon-twitter icon"></div></a>-->
+<!--                        {% endif %}-->
+<!--                        {% if GITHUB %}-->
+<!--                        <a href="{{ GITHUB }}" target="_blank"><div class="icon-github icon"></div></a>-->
+<!--                        {% endif %}-->
+<!--                        {% if STRAVA %}-->
+<!--                        <a href="{{ INSTAGRAM }}" target="_blank"><div class="icon-instagram icon"></div></a>-->
+<!--                        {% endif %}-->
+<!--                        {% if GOODREADS %}-->
+<!--                        <a href="{{ GOODREADS }}" target="_blank"><div class="icon-goodreads icon"></div></a>-->
+<!--                        {% endif %}-->
+<!--                        {% if FOURSQUARE %}-->
+<!--                        <a href="{{ FOURSQUARE }}" target="_blank"><div class="icon-foursquare icon"></div></a>-->
+<!--                        {% endif %}-->
+<!--                    </div>-->
+                    <p>© <script>document.write(moment().format('YYYY'));</script> {{ AUTHOR }}</p>
+                    {% if ATTRIBUTION %} 
+                    <p><i>"Ruckenwind"</i> Pelican Theme</p>
+                    <p>Designed and built by <a href="https://androiddrew.github.io">Drew Bednar</a> in Kalamazoo MI</p>
+                    {% endif %}
+                </footer>
+        {% endblock footer %}
+        </div>
+</body>
+</html>

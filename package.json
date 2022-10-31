@@ -1,0 +1,25 @@
+{
+  "name": "ruckenwind",
+  "version": "0.1.0",
+  "description": "A Pelican theme using TailwindCSS",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/androiddrew/ruckenwind.git"
+  },
+  "keywords": [
+    "tailwind",
+    "pelican",
+    "python"
+  ],
+  "author": "Drew Bednar",
+  "bugs": {
+    "url": "https://github.com/androiddrew/ruckenwind/issues"
+  },
+  "homepage": "https://github.com/androiddrew/ruckenwind#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.1"
+  }
+}
