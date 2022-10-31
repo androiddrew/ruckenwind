@@ -38,19 +38,31 @@ Technically, it's supposed to be "rückenwind" with an umlaut, but we are silly 
 
 For an introduction in the use of git submodules see https://phoenixnap.com/kb/git-submodule.
 
+Create a themes directory within your Pelican project, then add this repository as a git submodule.
+
+```
+mkdir themes
+cd themes
+git submodule add https://github.com/androiddrew/ruckenwind.git
+```
+
 ### Building the CSS
 
 To make changes to the templates you will first need install dependencies with npm
 
 ```
+
 cd themes/ruckenwind/
 npm install
+
 ```
 
 Tailwind cli will only output to `./static/ruckenwind.css` the utility classes used in the `templates/` directories as configured in `tailwind.config.js`. Changes to these templates will require recompiling the css.
 
 ```
+
 npx tailwindcss -i ./src/input.css -o ./static/css/ruckenwind.css --watch
+
 ```
 
 ## Configuration
