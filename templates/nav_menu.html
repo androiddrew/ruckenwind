@@ -1,0 +1,27 @@
+<div class="absolute inset-0">
+    <nav class="p-6 hidden md:flex items-center justify-between text-white">
+      <div>
+        <a class="text-xl font-extrabold hover:text-gray-400 duration-300 tracking-normal" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+      </div>
+      <div>
+        <div class="flex flex-row space-x-6">
+          {% for title, link in MENUITEMS %}
+          <a href="{{ link }}">{{ title }}</a></li>
+          {% endfor %}
+
+          {% if DISPLAY_PAGES_ON_MENU %}
+          {# FIXME: Simplify to 'for p in pages' when we are ready to drop support for Pelican < 3.7 #}
+          {% for p in PAGES or pages %}
+            <a class="uppercase text-sm font-semibold hover:text-gray-400 duration-300 tracking-wide" href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+          {% endfor %}
+          {% else %}
+          {% if DISPLAY_CATEGORIES_ON_MENU %}
+              {% for cat, null in categories %}
+                  <li class="uppercase text-sm font-semibold hover:text-gray-400 duration-300 tracking-wide"><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+              {% endfor %}
+          {% endif %}
+      {% endif %}
+        </div>
+      </div>
+    </nav>
+  </div>

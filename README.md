@@ -4,6 +4,29 @@ A Pelican Theme.
 
 Technically, it's supposed to be "rückenwind" with an umlaut, but we are silly Americans so we dropped it. It means "tailwind" in German, and we chose it because we use [TailwindCSS](https://tailwindcss.com/) for this theme's styling.
 
+## Header Images and Overlays
+
+When using a header image with the `HEADER_COVER` configuration option, it may be advantageous to use a transparent overlay to make the navbar and h1 text more visible. We can use the `HEADER_COLOR` configuration option set to a safelisted background color in the `tailwind.conf.js` to achieve this outcome. 
+
+By default we have safelisted the gray palatte, bu you can easily add additional colors.
+```
+  safelist: [
+    'bg-gray-100',
+    'bg-gray-200',
+    'bg-gray-300',
+    'bg-gray-400',
+    'bg-gray-500',
+    'bg-gray-600',
+    'bg-gray-700',
+    'bg-gray-800',
+    'bg-gray-900',
+  ],
+```
+
+## Icons
+
+You can extend the social sections of this template with icons from https://simpleicons.org/
+
 ## Features
 
 - Clean, readable, accessible, and fast theme

@@ -1,30 +1,86 @@
-{% extends 'base.html' %}
-<!-- twitter card metadata -->
-{% block twittercard %}
-{% if SITEIMAGE %}
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{{ SITEURL }}/images/{{ SITEIMAGE }}">
-<meta name="twitter:creator" content="{{ TWITTER_USERNAME }}">
-{% elif GRAVATAR %}
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="{{ GRAVATAR }}">
-{% elif LOGO %}
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="{{ SITEURL }}/images/{{ LOGO }}">
-{% endif %}
-<meta name="twitter:site" content="{{ TWITTER_USERNAME }}">
-<meta name="twitter:title" content="{{ SITENAME }}">
-<meta name="twitter:description" content="{{ SITEDESCRIPTION }}">
-{% endblock twittercard %}
-<!-- OG Tags -->
-{% block ogtags %}
-<meta property="og:url" content="{{ SITEURL }}"/>
-<meta property="og:title" content="{{ SITENAME }}" />
-<meta property="og:description" content="{{ SITEDESCRIPTION }}" />
-{% if SITEIMAGE %}
-<meta property="og:image" content="{{ SITEURL }}/images/{{ SITEIMAGE }}" />
-{% endif %}
-{% endblock ogtags %}
+{% extends "base.html" %}
+
+{% block header %}
+<header>
+    <div class="relative">
+      <!-- Header image and overlay -->
+      <div class="absolute inset-0">
+        {% if HEADER_COVER %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ HEADER_COVER }}" alt="" aria-hidden="true" />
+        {% else %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/home-bg.jpg" alt="" aria-hidden="true" />
+        {% endif %}
+        {% if HEADER_COLOR %}
+        <div
+          class="h-full absolute inset-0 {{ HEADER_COLOR }} mix-blend-multiply"
+          aria-hidden="true"
+        ></div>
+        {% endif%}
+      </div>
+      <!-- End Header image and overlay -->
+      <!-- Nav menu -->
+      <div class="absolute inset-0">
+        <nav class="p-6 hidden md:flex items-center justify-between text-white">
+          <div>
+            <a class="text-xl font-extrabold hover:text-gray-400 duration-300 tracking-normal" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+          </div>
+          <div>
+            <div class="flex flex-row space-x-6">
+              {% for title, link in MENUITEMS %}
+              <a href="{{ link }}">{{ title }}</a></li>
+              {% endfor %}
+
+              {% if DISPLAY_PAGES_ON_MENU %}
+              {# FIXME: Simplify to 'for p in pages' when we are ready to drop support for Pelican < 3.7 #}
+              {% for p in PAGES or pages %}
+                <a class="uppercase text-sm font-semibold hover:text-gray-400 duration-300 tracking-wide" href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+              {% endfor %}
+              {% else %}
+              {% if DISPLAY_CATEGORIES_ON_MENU %}
+                  {% for cat, null in categories %}
+                      <li class="uppercase text-sm font-semibold hover:text-gray-400 duration-300 tracking-wide"><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                  {% endfor %}
+              {% endif %}
+          {% endif %}
+            </div>
+          </div>
+        </nav>
+      </div>
+      <!-- End Nav menu -->
+      <div
+        class="relative mx-auto max-w-xl lg:max-w-4xl py-16 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
+        <h1
+          class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-normal text-white align-middle">
+          {{ SITENAME }}
+        </h1>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
+
 {% block content %}
-{% include 'article_list.html' %}
+    {% for article in articles_page.object_list %}
+      <article>
+        <hr class="mb-6">
+        <a href="{{ SITEURL }}/{{ article.url }}"><h2
+          class="text-3xl md:text-4xl font-black text-gray-800 hover:text-indigo-500 tracking-wide duration-300">
+          {{ article.title }}
+        </h2></a>
+        <p class="mt-6 text-xl">
+          {% if article.has_summary %}
+          {{ article.summary }}
+          {% elif article.summary %}
+          {{ article.summary|striptags|truncate(140) }}
+          {% endif %}
+        </p>
+        <p class="italic text-lg text-gray-500 mt-6">
+          Posted by 
+          {% for author in article.authors %}
+          <a class="text-gray-800 hover:text-indigo-500 hover:underline duration-500" href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+          {% endfor %}
+          on {{ article.locale_date }}
+        </p>
+      </article>
+    {% endfor %}
+    {% include "pagination.html" %}
 {% endblock content %}

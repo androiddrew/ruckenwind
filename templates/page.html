@@ -1,85 +1,39 @@
-{% extends "base.html" %}
-{% block head %}
-  {{ super() }}
-  {% if page.description %}
-    <meta name="description" content="{{ page.description }}" />
+{% extends "index.html" %}
+
+{% block title %}{{ page.title }}{% endblock title %}
+
+{% block header %}
+<header>
+    <div class="relative">
+      <div class="absolute inset-0">
+  <!-- Page Header -->
+  {% if page.header_cover %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ page.header_cover }}" alt="" aria-hidden="true" />
+  {% elif HEADER_COVER_ARTICLE %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ HEADER_COVER_PAGE }}" alt="" aria-hidden="true" />
+  {% else %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/contact-bg.jpg" alt="" aria-hidden="true" />
   {% endif %}
+  {% if page.header_color %}
+        <div class="h-full absolute inset-0 {{ page.header_color }} mix-blend-multiply" aria-hidden="true"></div>
+  {% elif HEADER_COLOR %}
+        <div class="h-full absolute inset-0 {{ HEADER_COLOR }} mix-blend-multiply" aria-hidden="true"></div>
+  {% endif %}
+      </div>
+  <!-- Nav Menu -->
+  {% include "nav_menu.html" %}
+  <!-- End Nav Menu -->
+      <div class="relative mx-auto max-w-xl lg:max-w-4xl py-16 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-normal text-white align-middle">
+          {{ page.title|striptags }}
+        </h1>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
 
-  {% for tag in page.tags %}
-    <meta name="tags" content="{{tag}}" />
-  {% endfor %}
-
-{% endblock %}
-{% block twittercard %}
-{% if page.cover_image %}
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{{ SITEURL }}/images/{{ page.cover_image }}">
-<meta name="twitter:creator" content="{{ TWITTER_USERNAME }}">
-{% elif GRAVATAR %}
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="{{ GRAVATAR }}">
-{% elif LOGO %}
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="{{ SITEURL }}/images/{{ LOGO }}">
-{% endif %}
-<meta name="twitter:site" content="{{ TWITTER_USERNAME }}">
-<meta name="twitter:title" content="{{ page.title }}">
-<meta name="twitter:description" content="{{ page.description }}">
-{% endblock twittercard %}
-<!-- OG Tags -->
-{% block ogtags %}
-<meta property="og:url" content="{{ SITEURL }}/{{ page.url }}"/>
-<meta property="og:title" content="{{ SITENAME }} | {{ page.title }}" />
-<meta property="og:description" content="{{ page.description }}" />
-{% if page.cover_image %}
-<meta property="og:image" content="{{ SITEURL }}/images/{{ page.cover_image }}" />
-{% endif %}
-{% endblock ogtags %}
 {% block content %}
-  <div class="article" role="article">
     <article>
-      {% if page.date %}
-        <footer>
-            <a name="top"></a>
-            <p>
-              <time datetime=" {{ page.date }}">
-                <script>document.write(moment('{{ page.date }}').format('LL'));</script>
-              </time>
-            </p>
-        </footer>
-      {% endif %}
-        <header>
-          <h2>
-            {{ page.title }}
-          </h2>
-        </header>
-      <div class="content">
-         {{ page.content|safe }}
-      </div>
-      <div class="back-to-top">
-          <a href="#top">back to top</a>
-      </div>
-      {% if DISQUS_SITENAME %}
-      <div id="disqus_thread"></div>
-        {% if SITEURL %}
-        <script>
-          var disqus_config = function () {
-          this.page.url = "{{ SITEURL }}/{{ page.url }}";  // Replace PAGE_URL with your page's canonical URL variable
-          this.page.identifier = "{{ page.slug }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-          };
-        </script>
-        {% endif %}
-        <script>
-        (function() {
-              var d = document, s = d.createElement('script');
-              s.src = 'https://{{ DISQUS_SITENAME }}.disqus.com/embed.js';
-              s.setAttribute('data-timestamp', +new Date());
-              (d.head || d.body).appendChild(s);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-      {% endif %}
+        {{ page.content }}
     </article>
-  </div>
-<!-- end article -->
 {% endblock content %}

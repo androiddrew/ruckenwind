@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A Pelican theme using TailwindCSS",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tailwind": "npx tailwindcss -i ./src/input.css -o ./static/css/ruckenwind.css --watch"
   },
   "repository": {
     "type": "git",
