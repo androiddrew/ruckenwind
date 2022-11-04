@@ -25,5 +25,7 @@ module.exports = {
     'bg-gray-900',
     'table-auto',
   ],
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }

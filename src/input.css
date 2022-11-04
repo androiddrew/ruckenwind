@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* THIS STYLES CONTENT WITHIN ARTICLE AND PAGE BLOCKS */
-@layer base {
+/* @layer base {
 
     article.content {
         @apply space-y-6;
@@ -48,4 +48,4 @@
         @apply rounded-sm;
     }
 
-}
+} */

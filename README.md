@@ -4,6 +4,10 @@ A Pelican Theme.
 
 Technically, it's supposed to be "rückenwind" with an umlaut, but we are silly Americans so we dropped it. It means "tailwind" in German, and we chose it because we use [TailwindCSS](https://tailwindcss.com/) for this theme's styling.
 
+## Markdown
+
+I have found this guide to be one of the best markdown guides available: https://www.markdownguide.org/basic-syntax/. The tailwind typography plugin used in this project has full styling support for all items processed by the markdown engine.
+
 ## Header Images and Overlays
 
 When using a header image with the `HEADER_COVER` configuration option, it may be advantageous to use a transparent overlay to make the navbar and h1 text more visible. We can use the `HEADER_COLOR` configuration option set to a safelisted background color in the `tailwind.conf.js` to achieve this outcome. 

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/androiddrew/ruckenwind#readme",
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.7",
     "tailwindcss": "^3.2.1"
   }
 }
