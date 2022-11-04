@@ -14,6 +14,7 @@ module.exports = {
   },
   // Used to set HEADER_COLOR values. This appears as a transparent overlay over top of a HEADER_COVER image.
   safelist: [
+    'bg-gray-100/30',
     'bg-gray-100',
     'bg-gray-200',
     'bg-gray-300',
