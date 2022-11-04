@@ -156,7 +156,13 @@
     <!-- Footer -->
     {% include 'footer.html' %}
     <!-- End Footer -->
+    {% if not DISABLE_CUSTOM_THEME_JAVASCRIPT %}
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/ruckenwind.js"></script>
+    {% endif %} 
+    
     {% include 'analytics.html' %}
     {% include 'disqus_script.html' %}
+
   </body>
 </html>
