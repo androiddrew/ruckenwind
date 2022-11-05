@@ -34,13 +34,13 @@
 
 {% block content %}
     {% for article in articles_page.object_list %}
-      <article>
-        <hr class="mb-6">
-        <a href="{{ SITEURL }}/{{ article.url }}"><h2
-          class="text-3xl md:text-4xl font-black text-gray-800 hover:text-indigo-500 tracking-wide duration-300">
+      <article class="prose">
+        <hr class="">
+        <a class="no-underline" href="{{ SITEURL }}/{{ article.url }}"><h2
+          class="my-2 text-3xl md:text-4xl font-extrabold text-gray-800 hover:text-indigo-500 tracking-wide duration-300">
           {{ article.title }}
         </h2></a>
-        <p class="mt-6 text-xl">
+        <p class="text-xl">
           {% if article.has_summary %}
           {{ article.summary }}
           {% elif article.summary %}
