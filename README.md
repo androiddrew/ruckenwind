@@ -1,10 +1,12 @@
 # Ruckenwind
 
-A Pelican Theme.
+A Pelican Theme inspired by https://github.com/StartBootstrap/startbootstrap-clean-blog and it's Pelican https://github.com/gilsondev/pelican-clean-blog theme. Reimplemented in Tailwind, because I like it better. 
 
-Technically, it's supposed to be "rückenwind" with an umlaut, but we are silly Americans so we dropped it. It means "tailwind" in German, and we chose it because we use [TailwindCSS](https://tailwindcss.com/) for this theme's styling.
+Technically, it's supposed to be "rückenwind" with an umlaut, but I am silly Americans so I dropped it. It means "tailwind" in German, and I chose it because I use [TailwindCSS](https://tailwindcss.com/) for this theme's styling.
 
 ## Markdown
+
+I have only tested this theme with Markdown content.
 
 I have found this guide to be one of the best markdown guides available: https://www.markdownguide.org/basic-syntax/. The tailwind typography plugin used in this project has full styling support for all items processed by the markdown engine.
 
@@ -29,7 +31,7 @@ By default we have safelisted the gray palatte, bu you can easily add additional
 
 ## Icons
 
-You can extend the social sections of this template with icons from https://simpleicons.org/
+You can extend the social sections of this template with svg icons from https://simpleicons.org/. Be sure to abide by branding guidelines if applicable.
 
 ## Features
 
@@ -43,14 +45,15 @@ You can extend the social sections of this template with icons from https://simp
 - Gravatar support
 - Disqus support
 - Pygments syntax highlighting for code blocks
-- Display Twitter, Github, Facebook, Instagram, Strava, and Goodreads icons in footer if configured
+- Display Twitter, Github, Facebook, Instagram (Coming soon)
 
 ## Template support
 
 ### Supported
 
-- archives.html
-- period_archives.html
+- archives.html (Coming soon)
+- period_archives.html (Coming soon)
+- social links (Coming soon)
 - article.html
 - categories.html
 - category.html
@@ -58,6 +61,7 @@ You can extend the social sections of this template with icons from https://simp
 - page.html
 - tag.html
 - tags.html
+
 
 ## Getting started with dev
 
@@ -67,7 +71,7 @@ For an introduction in the use of git submodules see https://phoenixnap.com/kb/g
 
 Create a themes directory within your Pelican project, then add this repository as a git submodule.
 
-```
+```bash
 mkdir themes
 cd themes
 git submodule add https://github.com/androiddrew/ruckenwind.git
@@ -77,19 +81,15 @@ git submodule add https://github.com/androiddrew/ruckenwind.git
 
 To make changes to the templates you will first need install dependencies with npm
 
-```
-
+```bash
 cd themes/ruckenwind/
 npm install
-
 ```
 
 Tailwind cli will only output to `./static/ruckenwind.css` the utility classes used in the `templates/` directories as configured in `tailwind.config.js`. Changes to these templates will require recompiling the css.
 
-```
-
+```bash
 npx tailwindcss -i ./src/input.css -o ./static/css/ruckenwind.css --watch
-
 ```
 
 ## Configuration
