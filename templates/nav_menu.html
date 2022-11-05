@@ -37,20 +37,19 @@
   <!-- Mobile Menu -->
   <div class="md:hidden">
       <!-- Because it is being placed in the relative div above. -->
-      <div id="menu" class="text-gray-900 absolute flex-col items-center self-end hidden py-8 mt-10 space-y-3 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
-        <a class="px-4 py-2 uppercase font-semibold hover:text-gray-400 duration-300 tracking-wide" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+      <div id="menu" class="bg-gray-50 text-gray-800 absolute flex-col items-center self-end hidden py-8 mt- space-y-3 font-bold sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
+        <a class="underline px-4 py-2 uppercase font-semibold hover:text-indigo-500 duration-300 tracking-wide" href="{{ SITEURL }}/">{{ SITENAME }}</a>
         {% for title, link in MENUITEMS %}
-        <a class="px-4 py-2 uppercase font-semibold hover:text-gray-400 duration-300 tracking-wide" href="{{ link }}">{{ title }}</a>
+        <a class="underline px-4 py-2 uppercase font-semibold hover:text-indigo-500 duration-300 tracking-wide" href="{{ link }}">{{ title }}</a>
         {% endfor %}
         {% if DISPLAY_PAGES_ON_MENU %}
-          {# FIXME: Simplify to 'for p in pages' when we are ready to drop support for Pelican < 3.7 #}
-          {% for p in PAGES or pages %}
-            <a class="px-4 py-2 uppercase  font-semibold hover:text-gray-400 duration-300 tracking-wide" href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+          {% for p in pages %}
+            <a class="underline px-4 py-2 uppercase  font-semibold hover:text-indigo-500 duration-300 tracking-wide" href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
           {% endfor %}
           {% else %}
             {% if DISPLAY_CATEGORIES_ON_MENU %}
                 {% for cat, null in categories %}
-                <a class="px-4 py-2 uppercase font-semibold hover:text-gray-400 duration-300 tracking-wide" href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>
+                <a class="underline px-4 py-2 uppercase font-semibold hover:text-indigo-500 duration-300 tracking-wide" href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>
                 {% endfor %}
             {% endif %}
           {% endif %}
