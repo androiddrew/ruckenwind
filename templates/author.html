@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+
+{% block title %}{{ SITENAME }} - Articles by {{ author }}{% endblock %}
+
+{% block opengraph %}
+    {{ super() }}
+    <meta property="og:title" content="{{ SITENAME }} - Articles by {{ author }}">
+    <meta property="og:type" content="profile">
+    <meta property="profile:first_name" content="{{ author.name.split(' ')[0] }}">
+    <meta property="profile:last_name" content="{{ author.name.split(' ')[1:]|join(' ') }}">
+    <meta property="profile:username" content="{{ author.slug }}">
+{% endblock opengraph %}
+
+{% block header %}
+<header>
+    <div class="relative">
+      <div class="absolute inset-0">
+  <!-- Page Header -->
+  {% if HEADER_COVER_AUTHOR %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ HEADER_COVER_AUTHOR }}" alt="" aria-hidden="true" />
+  {% elif HEADER_COVER %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ HEADER_COVER }}" alt="" aria-hidden="true" />
+  {% else %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/about-bg.jpg" alt="" aria-hidden="true" />
+  {% endif %}
+  {% if HEADER_COLOR %}
+        <div class="h-full absolute inset-0 {{ HEADER_COLOR }} mix-blend-multiply" aria-hidden="true"></div>
+  {% endif %}
+      </div>
+  <!-- Nav Menu -->
+  {% include "nav_menu.html" %}
+  <!-- End Nav Menu -->
+      <div class="relative mx-auto max-w-xl lg:max-w-4xl py-16 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-normal text-white align-middle">
+          Articles By: {{ author }}
+        </h1>
+      </div>
+    </div>
+  </header>
+{% endblock header %}

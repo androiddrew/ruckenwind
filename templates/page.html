@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+
+{% block title %}{{ page.title }}{% endblock title %}
+
+{% block header %}
+<header>
+    <div class="relative">
+      <div class="absolute inset-0">
+  <!-- Page Header -->
+  {% if page.header_cover %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ page.header_cover }}" alt="" aria-hidden="true" />
+  {% elif HEADER_COVER_ARTICLE %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ HEADER_COVER_PAGE }}" alt="" aria-hidden="true" />
+  {% else %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/contact-bg.jpg" alt="" aria-hidden="true" />
+  {% endif %}
+  {% if page.header_color %}
+        <div class="h-full absolute inset-0 {{ page.header_color }} mix-blend-multiply" aria-hidden="true"></div>
+  {% elif HEADER_COLOR %}
+        <div class="h-full absolute inset-0 {{ HEADER_COLOR }} mix-blend-multiply" aria-hidden="true"></div>
+  {% endif %}
+      </div>
+  <!-- Nav Menu -->
+  {% include "nav_menu.html" %}
+  <!-- End Nav Menu -->
+      <div class="relative mx-auto max-w-xl lg:max-w-4xl py-16 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-normal text-white align-middle">
+          {{ page.title|striptags }}
+        </h1>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
+
+{% block content %}
+    <article class="prose prose-lg">
+        {{ page.content }}
+    </article>
+{% endblock content %}

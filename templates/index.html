@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block header %}
+<header>
+    <div class="relative">
+      <!-- Header image and overlay -->
+      <div class="absolute inset-0">
+        {% if HEADER_COVER %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ HEADER_COVER }}" alt="" aria-hidden="true" />
+        {% else %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/home-bg.jpg" alt="" aria-hidden="true" />
+        {% endif %}
+        {% if HEADER_COLOR %}
+        <div
+          class="h-full absolute inset-0 {{ HEADER_COLOR }} mix-blend-multiply"
+          aria-hidden="true"
+        ></div>
+        {% endif%}
+      </div>
+      <!-- End Header image and overlay -->
+      <!-- Nav menu -->
+      {% include "nav_menu.html" %}
+      <!-- End Nav menu -->
+      <div
+        class="relative mx-auto max-w-xl lg:max-w-4xl py-16 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
+        <h1
+          class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-normal text-white align-middle">
+          {{ SITENAME }}
+        </h1>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
+
+{% block content %}
+    {% for article in articles_page.object_list %}
+      <article class="prose">
+        <hr class="">
+        <a class="no-underline" href="{{ SITEURL }}/{{ article.url }}"><h2
+          class="my-2 text-3xl md:text-4xl font-extrabold text-gray-800 hover:text-indigo-500 tracking-wide duration-300">
+          {{ article.title }}
+        </h2></a>
+        <p class="text-xl">
+          {% if article.has_summary %}
+          {{ article.summary }}
+          {% elif article.summary %}
+          {{ article.summary|striptags|truncate(140) }}
+          {% endif %}
+        </p>
+        <p class="italic text-lg text-gray-500 mt-6">
+          Posted by 
+          {% for author in article.authors %}
+          <a class="text-gray-800 hover:text-indigo-500 hover:underline duration-500" href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+          {% endfor %}
+          on {{ article.locale_date }}
+        </p>
+      </article>
+    {% endfor %}
+    {% include "pagination.html" %}
+{% endblock content %}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% if GOOGLE_SITE_VERIFICATION %}
+            <meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">
+        {% endif %}
+
+        <title>{% block title %}{{ SITENAME }}{% if SITESUBTITLE and SHOW_SITESUBTITLE_IN_HTML %} - {{ SITESUBTITLE }}{% endif %}{% endblock title %}</title>
+
+    {% for name,link in SOCIAL if name in ['rss', 'rss-square'] %}
+        <link href="{{ link }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
+    {% else %}
+        {% if FEED_ALL_ATOM %}
+            <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
+        {% endif %}
+        {% if FEED_ALL_RSS %}
+            <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" />
+        {% endif %}
+        {% if FEED_ATOM %}
+            <link href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+        {% endif %}
+        {% if FEED_RSS %}
+            <link href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        {% endif %}
+        {% if CATEGORY_FEED_ATOM and category %}
+            <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_ATOM|format(slug=category.slug) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Categories Atom Feed" />
+        {% endif %}
+        {% if CATEGORY_FEED_RSS and category %}
+            <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_RSS|format(slug=category.slug) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Categories RSS Feed" />
+        {% endif %}
+        {% if TAG_FEED_ATOM and tag %}
+            <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_ATOM|format(slug=tag.slug) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Tags Atom Feed" />
+        {% endif %}
+        {% if TAG_FEED_RSS and tag %}
+            <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_RSS|format(slug=tag.slug) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Tags RSS Feed" />
+        {% endif %}
+    {% endfor %}
+        <!-- Custom CSS -->
+        <link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/ruckenwind.css" rel="stylesheet">
+
+        <!-- Code highlight color scheme -->
+        {% if COLOR_SCHEME_CSS %}
+            <link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/code_blocks/{{ COLOR_SCHEME_CSS }}" rel="stylesheet">
+        {% else %}
+            <link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/code_blocks/darkly.css" rel="stylesheet">
+        {% endif %}
+
+        {% if CSS_OVERRIDE %}
+            <!-- CSS specified by the user -->
+            <link href="{{ SITEURL }}/{{ CSS_OVERRIDE }}" rel="stylesheet">
+        {% endif %}
+
+        <!-- Custom Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    {% endblock head %}
+
+	{% block opengraph %}
+            {% for admin in FACEBOOK_ADMINS %}
+                <meta property="fb:admins" content="{{ admin }}" >
+            {% endfor %}
+            {% for LOC in LOCALE %}
+                <meta property="og:locale" content="{{ LOC }}">
+            {% endfor %}
+		<meta property="og:site_name" content="{{ SITENAME }}">
+	{% endblock opengraph %}
+    {% block twitter_card %}
+        {% for name,link in SOCIAL if name in ['twitter'] %}
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:site" content="@{{ link|replace('http://', 'https://')|replace('https://twitter.com/', '') }}">
+            <meta name="twitter:title" content="{{ SITENAME }}">
+            <meta name="twitter:description" content="{{ SITESUBTITLE|default('View the blog.') }}">
+            {% if HEADER_COVER %}
+                <meta name="twitter:image" content="{{ SITEURL }}/{{ HEADER_COVER }}">
+            {% else %}
+                <meta name="twitter:image" content="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/post-bg.jpg">
+            {% endif %}
+        {% endfor %}
+    {% endblock twitter_card %}
+    {% if FAVICON %}
+    <link rel="icon" href="/{{FAVICON}}">
+    {% endif %}
+</head>
+
+<body class="bg-gray-50 text-xl">
+    {% block header %}
+    <header>
+      <div class="relative">
+        <!-- Header image and overlay -->
+        <div class="absolute inset-0">
+          <img class="h-full w-full object-cover" src="img/home-bg.jpg" alt="" />
+          <!-- <div
+            class="h-full absolute inset-0 bg-gray-800 mix-blend-multiply"
+            aria-hidden="true"
+          ></div> -->
+        </div>
+        <!-- End Header image and overlay -->
+        <!-- Nav menu -->
+        <div class="absolute inset-0">
+          <nav class="p-6 hidden md:flex items-center justify-between text-white">
+            <div>
+              <a class="text-xl font-extrabold hover:text-gray-400 duration-300 tracking-normal" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+            </div>
+            <div>
+              <div class="flex flex-row space-x-6">
+                {% for title, link in MENUITEMS %}
+                <li><a href="{{ link }}">{{ title }}</a></li>
+                {% endfor %}
+
+                {% if DISPLAY_PAGES_ON_MENU %}
+                {# FIXME: Simplify to 'for p in pages' when we are ready to drop support for Pelican < 3.7 #}
+                {% for p in PAGES or pages %}
+                <li class="uppercase text-sm font-semibold hover:text-gray-400 duration-300 tracking-wide"><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+                {% endfor %}
+                {% else %}
+                {% if DISPLAY_CATEGORIES_ON_MENU %}
+                    {% for cat, null in categories %}
+                        <li class="uppercase text-sm font-semibold hover:text-gray-400 duration-300 tracking-wide"><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+              </div>
+            </div>
+          </nav>
+        </div>
+        <!-- End Nav menu -->
+        <div
+          class="relative mx-auto max-w-xl lg:max-w-4xl py-16 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
+          <h1
+            class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-normal text-white align-middle">
+            {{ SITENAME }}
+          </h1>
+        </div>
+      </div>
+      <div>
+    </header>
+    {% endblock header %}
+
+    <!-- Main Content -->
+    <main class="text-gray-900">
+      <div class="mt-16 flex justify-center space-x-6 mx-auto max-w-3xl">
+        <div class="mx-4 space-y-6 md:space-y-10 lg:space-y-12">
+      <!-- <div class="mt-16 flex justify-center mx-auto max-w-3xl">
+          <div class="mx-4">  -->
+          {% block content %}{% endblock content %}
+        </div>
+      </div>
+    </main>
+    <!-- End Main Content -->
+    <hr class="mt-12" />
+    <!-- Footer -->
+    {% include 'footer.html' %}
+    <!-- End Footer -->
+    {% if not DISABLE_CUSTOM_THEME_JAVASCRIPT %}
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/ruckenwind.js"></script>
+    {% endif %} 
+    
+    {% include 'analytics.html' %}
+    {% include 'disqus_script.html' %}
+
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<nav class="relative mx-auto text-white sticky top-0 z-10">
+  <!-- flex container for alignment. Gives flex row by default. Aligning items in the center. Justifing content with between option -->
+  <div id="navbar" class="flex items-center md:justify-between justify-end">
+      <!-- Logo with padding top 2 -->
+      <!-- Menu items -->
+      <!-- flex again for alignment but disappear on sm screens -->
+      <!-- So on md: flex  -->
+      <div class="hidden md:block">
+        <a class="p-6 text-xl font-extrabold hover:text-gray-400 duration-300 tracking-normal" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+      </div>
+      <div class="hidden md:flex">
+        {% for title, link in MENUITEMS %}
+        <a class="py-6 px-3 first:pl-6 last:pr-6 uppercase text-sm font-semibold hover:text-gray-400 duration-300 tracking-wide" href="{{ link }}">{{ title }}</a>
+        {% endfor %}
+        {% if DISPLAY_PAGES_ON_MENU %}
+          {# FIXME: Simplify to 'for p in pages' when we are ready to drop support for Pelican < 3.7 #}
+          {% for p in PAGES or pages %}
+            <a class="py-6 px-3 first:pl-6 last:pr-6 uppercase text-sm font-semibold hover:text-gray-400 duration-300 tracking-wide" href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+          {% endfor %}
+          {% else %}
+            {% if DISPLAY_CATEGORIES_ON_MENU %}
+                {% for cat, null in categories %}
+                <a class="py-6 px-3 first:pl-6 last:pr-6 uppercase text-sm font-semibold hover:text-gray-400 duration-300 tracking-wide" href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>
+                {% endfor %}
+            {% endif %}
+          {% endif %}
+      </div>
+      <!-- Button -->
+      <!-- Hidden on smaller screens but on md(and up) display as block -->
+  <!-- Hamburger Icon -->
+  <button id="menu-btn" class="m-3 mr-6 p-3 block hamburger md:hidden focus:outline-none">
+      <span class="hamburger-top"></span>
+      <span class="hamburger-middle"></span>
+      <span class="hamburger-bottom"></span>
+  </button>
+  </div>
+  <!-- Mobile Menu -->
+  <div class="md:hidden">
+      <!-- Because it is being placed in the relative div above. -->
+      <div id="menu" class="bg-gray-50 text-gray-800 absolute flex-col items-center self-end hidden py-8 mt- space-y-3 font-bold sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
+        <a class="underline px-4 py-2 uppercase font-semibold hover:text-indigo-500 duration-300 tracking-wide" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+        {% for title, link in MENUITEMS %}
+        <a class="underline px-4 py-2 uppercase font-semibold hover:text-indigo-500 duration-300 tracking-wide" href="{{ link }}">{{ title }}</a>
+        {% endfor %}
+        {% if DISPLAY_PAGES_ON_MENU %}
+          {% for p in pages %}
+            <a class="underline px-4 py-2 uppercase  font-semibold hover:text-indigo-500 duration-300 tracking-wide" href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+          {% endfor %}
+          {% else %}
+            {% if DISPLAY_CATEGORIES_ON_MENU %}
+                {% for cat, null in categories %}
+                <a class="underline px-4 py-2 uppercase font-semibold hover:text-indigo-500 duration-300 tracking-wide" href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>
+                {% endfor %}
+            {% endif %}
+          {% endif %}
+      </div>
+  </div>
+</nav>
