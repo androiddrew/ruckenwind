@@ -3,24 +3,35 @@
 {% block title %}{{ SITENAME }} - Categories{% endblock %}
 
 {% block header %}
-    <!-- Page Header -->
-    {% if HEADER_COVER %}
-        <header class="intro-header" style="background-image: url('{{ SITEURL }}/{{ HEADER_COVER }}')">
-    {% elif HEADER_COLOR %}
-        <header class="intro-header" style="background-color: {{ HEADER_COLOR }}">
-    {% else %}
-        <header class="intro-header" style="background-image: url('{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/home-bg.jpg')">
-    {% endif %}
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="post-heading">
-                        <h1>{{ SITENAME }} - Categories</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+<header>
+    <div class="relative">
+      <!-- Header image and overlay -->
+      <div class="absolute inset-0">
+        {% if HEADER_COVER %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ HEADER_COVER }}" alt="" aria-hidden="true" />
+        {% else %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/home-bg.jpg" alt="" aria-hidden="true" />
+        {% endif %}
+        {% if HEADER_COLOR %}
+        <div
+          class="h-full absolute inset-0 {{ HEADER_COLOR }} mix-blend-multiply"
+          aria-hidden="true"
+        ></div>
+        {% endif%}
+      </div>
+      <!-- End Header image and overlay -->
+      <!-- Nav menu -->
+      {% include "nav_menu.html" %}
+      <!-- End Nav menu -->
+      <div
+        class="relative mx-auto max-w-xl lg:max-w-4xl py-16 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
+        <h1
+          class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-normal text-white align-middle">
+          {{ SITENAME }}
+        </h1>
+      </div>
+    </div>
+  </header>
 {% endblock header %}
 
 {% block content %}
