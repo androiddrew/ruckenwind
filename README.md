@@ -99,6 +99,8 @@ Here is a list of theme settings you can configure to alter aspects of the theme
 ```python
 # Theme Settings
 THEME = 'themes/ruckenwind'
+## The codehilite theme used for code blocks. Defaults to darkly.css. See /css/code_blocks/* for available themes.
+COLOR_SCHEME_CSS = 'github.css'
 ## used for OG tags and Twitter Card data on index page. (see https://ahrefs.com/blog/open-graph-meta-tags/)
 SITEIMAGE = 'site-cover.jpg'
 ## used for OG tags and Twitter Card data of index page
