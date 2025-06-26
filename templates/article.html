@@ -110,7 +110,7 @@
       </div>
     <!-- End Nav Menu -->
         <div class="relative mx-auto max-w-xl lg:max-w-4xl py-16 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
-          <h1 class="text-5xl md:text-7xl lg:text-7xl font-extrabold tracking-normal text-white align-middle">
+          <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-normal text-white align-middle">
             {{ article.title|striptags }}
           </h1>
         </div>
@@ -121,22 +121,14 @@
 {% block content %}
     <!-- Post Content -->
     <article class="content prose prose-lg hover:prose-a:text-indigo-500 prose-img:mx-auto lg:prose-xl">
-        <p class="italic text-lg text-gray-500 mt-6">
-            Posted by 
-            {% for author in article.authors %}
-            <a class="text-gray-800 hover:text-indigo-500 hover:underline duration-500" href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
-            {% endfor %}
-            on {{ article.locale_date }}
-            {% if article.tags %}
-            <br>
-            Tags: {% for tag in article.tags %}<a class="text-gray-800 hover:text-indigo-500 hover:underline duration-500" href="{{ SITEURL }}/{{ tag.url }}">{{ tag | escape }}</a>{% if not loop.last %}, {% endif %}{% endfor %}
-            {% endif %}
-        </p>
         {{ article.content }}
-        {% if article.tags %}
-            <p class="italic text-lg text-gray-500 mt-6">Tags: {% for tag in article.tags %}<a class="text-gray-800 hover:text-indigo-500 underline duration-500" href="{{ SITEURL }}/{{ tag.url }}">{{ tag | escape }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
-    {% endif %}
     </article>
+
+    {% if article.tags %}
+        <div class="tags">
+            <p>tags: {% for tag in article.tags %}<a class="hover:text-indigo-500 duration-300 underline" href="{{ SITEURL }}/{{ tag.url }}">{{ tag | escape }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
+        </div>
+    {% endif %}
 
     {% include 'sharing.html' %}
 

@@ -48,3 +48,9 @@
 .open .hamburger-bottom {
     transform: rotate(-45deg) translateY(6px) translate(-6px);
 }
+
+/* Remove extra backticks from inline code in prose blocks */
+.prose code::before,
+.prose code::after {
+  content: none !important;
+}

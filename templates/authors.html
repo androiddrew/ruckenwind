@@ -11,10 +11,14 @@
     {% else %}
         <header class="intro-header" style="background-image: url('{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/home-bg.jpg')">
     {% endif %}
-        <div class="relative mx-auto max-w-xl lg:max-w-4xl py-16 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
-          <h1 class="text-5xl md:text-7xl lg:text-7xl  font-extrabold tracking-normal text-white align-middle">
-            Articles by {{ author }}
-          </h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Articles by {{ author }}</h1>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 {% endblock header %}
