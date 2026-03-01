@@ -37,9 +37,9 @@
 {% block content %}
     {% for article in articles_page.object_list %}
       <article class="prose">
-        <hr class="">
+        <hr class="border-gray-200">
         <a class="no-underline" href="{{ SITEURL }}/{{ article.url }}"><h2
-          class="my-2 text-3xl md:text-4xl font-extrabold text-gray-800 hover:text-indigo-500 tracking-wide duration-300">
+          class="not-prose my-2 text-3xl md:text-4xl font-extrabold text-gray-800 hover:text-indigo-500 tracking-wide duration-300">
           {{ article.title }}
         </h2></a>
         <p class="text-xl">
