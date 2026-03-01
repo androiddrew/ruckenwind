@@ -12,21 +12,12 @@ I have found this guide to be one of the best markdown guides available: https:/
 
 ## Header Images and Overlays
 
-When using a header image with the `HEADER_COVER` configuration option, it may be advantageous to use a transparent overlay to make the navbar and h1 text more visible. We can use the `HEADER_COLOR` configuration option set to a safelisted background color in the `tailwind.conf.js` to achieve this outcome. 
+When using a header image with the `HEADER_COVER` configuration option, it may be advantageous to use a transparent overlay to make the navbar and h1 text more visible. We can use the `HEADER_COLOR` configuration option set to a safelisted background color in `src/input.css` to achieve this outcome.
 
-By default we have safelisted the gray palatte, bu you can easily add additional colors.
-```
-  safelist: [
-    'bg-gray-100',
-    'bg-gray-200',
-    'bg-gray-300',
-    'bg-gray-400',
-    'bg-gray-500',
-    'bg-gray-600',
-    'bg-gray-700',
-    'bg-gray-800',
-    'bg-gray-900',
-  ],
+By default we have safelisted the gray palette, but you can easily add additional colors using the `@source inline()` directive in `src/input.css`:
+```css
+/* In src/input.css - safelist for dynamic header overlays */
+@source inline("bg-gray-{100,200,300,400,500,600,700,800,900}");
 ```
 
 ## Icons
@@ -86,10 +77,10 @@ cd themes/ruckenwind/
 npm install
 ```
 
-Tailwind cli will only output to `./static/ruckenwind.css` the utility classes used in the `templates/` directories as configured in `tailwind.config.js`. Changes to these templates will require recompiling the css.
+Tailwind CLI will only output to `./static/ruckenwind.css` the utility classes used in the `templates/` directories. Configuration is now CSS-based in `src/input.css`. Changes to these templates will require recompiling the css.
 
 ```bash
-npx tailwindcss -i ./src/input.css -o ./static/css/ruckenwind.css --watch
+npx @tailwindcss/cli -i ./src/input.css -o ./static/css/ruckenwind.css --watch
 ```
 
 ## Configuration

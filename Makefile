@@ -4,4 +4,4 @@ help:
 	@echo "      make tailwind			Compile tailwind files."
 
 tailwind:
-	npx tailwindcss -i ./src/input.css -o ./static/css/ruckenwind.css --watch
+	npx @tailwindcss/cli -i ./src/input.css -o ./static/css/ruckenwind.css --watch

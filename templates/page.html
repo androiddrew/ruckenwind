@@ -1,6 +1,7 @@
 {% extends "index.html" %}
 
 {% block title %}{{ page.title }}{% endblock title %}
+{% block content_width %}max-w-prose{% endblock %}
 
 {% block header %}
 <header>
@@ -35,7 +36,7 @@
 {% endblock header %}
 
 {% block content %}
-    <article class="prose prose-lg">
+    <article class="prose prose-lg dark:prose-invert">
         {{ page.content }}
     </article>
 {% endblock content %}

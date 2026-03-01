@@ -1,6 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Typography plugin */
+@plugin "@tailwindcss/typography";
+
+/* Safelist for dynamic header overlay colors */
+@source inline("bg-gray-{100,200,300,400,500,600,700,800,900}");
+@source inline("bg-gray-100/30");
+@source inline("table-auto");
+
+/* Custom theme - font families */
+@theme {
+  --font-sans: "Inter var", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-ubersans: "Helvetica", "Arial", sans-serif;
+  --font-monospace: "Monospace";
+}
 
 /* Hamburger Menu */
 .hamburger {

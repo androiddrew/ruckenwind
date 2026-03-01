@@ -87,7 +87,7 @@
     {% endif %}
 </head>
 
-<body class="bg-gray-50 text-xl">
+<body class="bg-gray-50 dark:bg-gray-900 text-xl">
     {% block header %}
     <header>
       <div class="relative">
@@ -142,17 +142,15 @@
     {% endblock header %}
 
     <!-- Main Content -->
-    <main class="text-gray-900">
-      <div class="mt-16 flex justify-center space-x-6 mx-auto max-w-3xl">
-        <div class="mx-4 space-y-6 md:space-y-10 lg:space-y-12">
-      <!-- <div class="mt-16 flex justify-center mx-auto max-w-3xl">
-          <div class="mx-4">  -->
+    <main class="text-gray-900 dark:text-gray-100 overflow-x-hidden">
+      <div class="mt-16 mx-auto {% block content_width %}max-w-[586px]{% endblock %} px-4">
+        <div class="space-y-6 md:space-y-10 lg:space-y-12">
           {% block content %}{% endblock content %}
         </div>
       </div>
     </main>
     <!-- End Main Content -->
-    <hr class="mt-12" />
+    <hr class="mt-12 border-gray-200 dark:border-gray-700" />
     <!-- Footer -->
     {% include 'footer.html' %}
     <!-- End Footer -->

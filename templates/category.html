@@ -1,24 +1,33 @@
 {% extends "index.html" %}
 
-{% block title %}{{ SITENAME }} - Articles in the {{ category }} category{% endblock %}
+{% block title %}{{ SITENAME }} - {{ category }}{% endblock %}
 
 {% block header %}
+<header>
+    <div class="relative">
+      <div class="absolute inset-0">
     <!-- Page Header -->
-    {% if HEADER_COVER %}
-        <header class="intro-header" style="background-image: url('{{ SITEURL }}/{{ HEADER_COVER }}')">
-    {% elif HEADER_COLOR %}
-        <header class="intro-header" style="background-color: {{ HEADER_COLOR }}">
+    {% if HEADER_COVER_CATEGORY %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ HEADER_COVER_CATEGORY }}" alt="" aria-hidden="true" />
+    {% elif HEADER_COVER %}
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ HEADER_COVER }}" alt="" aria-hidden="true" />
     {% else %}
-        <header class="intro-header" style="background-image: url('{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/home-bg.jpg')">
+        <img class="h-full w-full object-cover" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/home-bg.jpg" alt="" aria-hidden="true" />
     {% endif %}
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="post-heading">
-                        <h1>Articles in the {{ category }} category</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    {% if HEADER_COLOR %}
+        <div class="h-full absolute inset-0 {{ HEADER_COLOR }} mix-blend-multiply" aria-hidden="true"></div>
+    {% endif %}
+      </div>
+    <!-- Nav Menu -->
+    <div class="absolute inset-0">
+        {% include "nav_menu.html" %}
+    </div>
+    <!-- End Nav Menu -->
+      <div class="relative mx-auto max-w-xl lg:max-w-4xl py-16 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-normal text-white align-middle">
+          {{ category }}
+        </h1>
+      </div>
+    </div>
+</header>
 {% endblock header %}

@@ -28,7 +28,7 @@
       <!-- Button -->
       <!-- Hidden on smaller screens but on md(and up) display as block -->
   <!-- Hamburger Icon -->
-  <button id="menu-btn" class="m-3 mr-6 p-3 block hamburger md:hidden focus:outline-none">
+  <button id="menu-btn" class="m-3 mr-6 p-3 block hamburger md:hidden focus:outline-hidden">
       <span class="hamburger-top"></span>
       <span class="hamburger-middle"></span>
       <span class="hamburger-bottom"></span>
@@ -37,7 +37,7 @@
   <!-- Mobile Menu -->
   <div class="md:hidden">
       <!-- Because it is being placed in the relative div above. -->
-      <div id="menu" class="bg-gray-50 text-gray-800 absolute flex-col items-center self-end hidden py-8 mt- space-y-3 font-bold sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
+      <div id="menu" class="bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 absolute flex-col items-center self-end hidden py-8 mt- space-y-3 font-bold sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
         <a class="underline px-4 py-2 uppercase font-semibold hover:text-indigo-500 duration-300 tracking-wide" href="{{ SITEURL }}/">{{ SITENAME }}</a>
         {% for title, link in MENUITEMS %}
         <a class="underline px-4 py-2 uppercase font-semibold hover:text-indigo-500 duration-300 tracking-wide" href="{{ link }}">{{ title }}</a>
