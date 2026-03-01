@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ article.title|striptags }}{% endblock %}
+{% block content_width %}max-w-prose{% endblock %}
 
 {% block head %}
     {{ super() }}
@@ -120,13 +121,13 @@
 
 {% block content %}
     <!-- Post Content -->
-    <article class="content prose prose-lg prose-a:hover:text-indigo-500 prose-img:mx-auto lg:prose-xl">
+    <article class="content prose prose-lg dark:prose-invert prose-a:hover:text-indigo-500 prose-img:mx-auto lg:prose-xl">
         {{ article.content }}
     </article>
 
     {% if article.tags %}
         <div class="tags">
-            <p>tags: {% for tag in article.tags %}<a class="hover:text-indigo-500 duration-300 underline" href="{{ SITEURL }}/{{ tag.url }}">{{ tag | escape }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
+            <p>tags: {% for tag in article.tags %}<a class="hover:text-indigo-500 dark:hover:text-indigo-400 duration-300 underline" href="{{ SITEURL }}/{{ tag.url }}">{{ tag | escape }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
         </div>
     {% endif %}
 
